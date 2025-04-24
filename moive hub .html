@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awesome Movieshub  - Watch Your Favorites Online</title>
+    <meta name="description" content="Discover and watch your favorite movies online. Explore different genres and levels.">
+    <meta name="keywords" content="movies, online movies, watch movies, free movies, action, comedy, drama">
+    <meta name="author" content="Your Name">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1em 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+
+        header nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        header nav ul li {
+            margin-left: 1em;
+        }
+
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5em 1em;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        header nav ul li a:hover {
+            background-color: #34495e;
+        }
+
+        main {
+            padding: 20px 0;
+            min-height: calc(100vh - 140px); /* Ensure main content takes up minimum height */
+        }
+
+        .hero {
+            background-color: #ecf0f1;
+            padding: 2em;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .hero h2 {
+            font-size: 2.2em;
+            margin-bottom: 0.5em;
+            color: #2c3e50;
+        }
+
+        .hero p {
+            font-size: 1.1em;
+            color: #7f8c8d;
+            margin-bottom: 1.5em;
+        }
+
+        .movie-filter {
+            background-color: #ffffff;
+            padding: 1.5em;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1em;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .movie-filter label {
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        .movie-filter select {
+            padding: 0.7em;
+            border-radius: 5px;
+            border: 1px solid #bdc3c7;
+            transition: border-color 0.3s ease;
+            font-size: 1em;
+        }
+
+        .movie-filter select:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.25);
+        }
+
+        .movie-filter button {
+            padding: 0.7em 1.5em;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-size: 1em;
+        }
+
+        .movie-filter button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .movie-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .movie-card {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .movie-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .movie-card img {
+            width: 100%;
+            display: block;
+            height: auto;
+            border-bottom: 1px solid #eee;
+        }
+
+        .movie-card .movie-info {
+            padding: 1em;
+        }
+
+
+        .movie-card h3 {
+            margin: 0 0 0.5em;
+            font-size: 1.4em;
+            color: #2c3e50;
+        }
+
+        .movie-card p {
+            margin: 0 0 1em;
+            color: #7f8c8d;
+            font-size: 1em;
+        }
+
+        .movie-card a {
+            display: block;
+            background-color: #e74c3c;
+            color: white;
+            text-align: center;
+            padding: 0.8em;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            border-radius: 0 0 8px 8px;
+            font-size: 1.1em;
+        }
+
+        .movie-card a:hover {
+            background-color: #c0392b;
+        }
+
+        .ad-slot {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .ad-slot iframe{
+            margin: 0 auto; /* Center the ad */
+            display: block;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1em 0;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1em;
+        }
+
+        footer nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1em;
+        }
+
+        footer nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 1em;
+        }
+
+        footer nav ul li a:hover {
+            color: #3498db;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            header .container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            header h1 {
+                margin-bottom: 0.5em;
+            }
+
+            header nav ul {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            header nav ul li {
+                margin-left: 0;
+                margin-bottom: 0.5em;
+            }
+
+            header nav ul li a {
+                display: block;
+                border-radius: 0;
+                padding: 0.7em 1em;
+            }
+
+            .movie-filter {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .movie-filter button{
+                width: 100%;
+            }
+
+            .movie-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            footer .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            footer nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            footer nav ul li {
+                margin: 0.5em 0;
+            }
+            .hero h2{
+                font-size: 1.8em;
+            }
+            .hero p{
+                font-size: 1em;
+            }
+        }
+        /* Google AdSense Styles */
+        .ad-slot {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Ensure ads are responsive */
+        .ad-responsive {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Awesome Movies</h1>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/movies">Movies</a></li>
+                    <li><a href="/genres">Genres</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h2>Welcome to Awesome Movies!</h2>
+            <p>Discover a wide selection of movies for all tastes.</p>
+             <div class="ad-slot">
+                <ins class="adsbygoogle ad-responsive"
+                     style="display:block"
+                     data-ad-client="ca-pub-xxxxxxxxxxxxxxxx"  /* Replace with your Publisher ID */
+                     data-ad-slot="your_ad_slot_id_1"      /* Replace with your Ad Slot ID */
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </section>
+
+        <section class="movie-filter">
+            <label for="movie-level">Select Movie Level:</label>
+            <select id="movie-level">
+                <option value="all">All Levels</option>
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="advanced">Advanced</option>
+            </select>
+            <button id="filter-button">Apply Filter</button>
+        </section>
+
+        <section class="movie-grid" id="movie-list">
+            </section>
+
+         <div class="ad-slot">
+            <ins class="adsbygoogle ad-responsive"
+                 style="display:block"
+                 data-ad-client="ca-pub-xxxxxxxxxxxxxxxx"  /* Replace with your Publisher ID */
+                 data-ad-slot="your_ad_slot_id_2"      /* Replace with your Ad Slot ID */
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Awesome Movies. All rights reserved.</p>
+            <nav>
+                <ul>
+                    <li><a href="/privacy">Privacy Policy</a></li>
+                    <li><a href="/terms">Terms of Service</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+       const movieList = [
+            {
+                title: "Beginner Movie 1",
+                level: "beginner",
+                imageUrl: "https://via.placeholder.com/150", // Replace with actual image URLs
+                description: "This is a beginner-level movie.",
+                link: "/movie/1",
+            },
+            {
+                title: "Intermediate Movie 1",
+                level: "intermediate",
+                imageUrl: "https://via.placeholder.com/150",
+                description: "This is an intermediate-level movie.",
+                link: "/movie/2",
+            },
+            {
+                title: "Advanced Movie 1",
+                level: "advanced",
+                imageUrl: "https://via.placeholder.com/150",
+                description: "This is an advanced-level movie.",
+                link: "/movie/3",
+            },
+             {
+                title: "Beginner Movie 2",
+                level: "beginner",
+                imageUrl: "https://via.placeholder.com/150", // Replace with actual image URLs
+                description: "This is a beginner-level movie.",
+                link: "/movie/4",
+            },
+            {
+                title: "Intermediate Movie 2",
+                level: "intermediate",
+                imageUrl: "https://via.placeholder.com/150",
+                description: "This is an intermediate-level movie.",
+                link: "/movie/5",
+            },
+            {
+                title: "Advanced Movie 2",
+                level: "advanced",
+                imageUrl: "https://via.placeholder.com/150",
+                description: "This is an advanced-level movie.",
+                link: "/movie/6",
+            },
+        ];
+
+        function createMovieCard(movie) {
+            const card = document.createElement("div");
+            card.className = "movie-card";
+            card.dataset.level = movie.level;
+
+            const img = document.createElement("img");
+            img.src = movie.imageUrl;
+            img.alt = movie.title;
+
+            const infoDiv = document.createElement("div");
+            infoDiv.className = "movie-info";
+
+            const title = document.createElement("h3");
+            title.textContent = movie.title;
+
+            const description = document.createElement("p");
+            description.textContent = movie.description;
+
+            const link = document.createElement("a");
+            link.href = movie.link;
+            link.textContent = "Watch Now";
+
+            infoDiv.appendChild(title);
+            infoDiv.appendChild(description);
+
+            card.appendChild(img);
+            card.appendChild(infoDiv);
+            card.appendChild(link);
+
+            return card;
+        }
+
+        function displayMovies(movies) {
+            const movieListContainer = document.getElementById("movie-list");
+            movieListContainer.innerHTML = ""; // Clear previous movies
+
+            movies.forEach((movie) => {
+                const movieCard = createMovieCard(movie);
+                movieListContainer.appendChild(movieCard);
+            });
+        }
+
+        function filterMovies() {
+            const selectedLevel = document.getElementById("movie-level").value;
+            const filteredMovies =
+                selectedLevel === "all"
+                    ? movieList
+                    : movieList.filter((movie) => movie.level === selectedLevel);
+            displayMovies(filteredMovies);
+        }
+
+        document.getElementById("filter-button").addEventListener("click", filterMovies);
+
+        // Initial display of all movies
+        displayMovies(movieList);
+    </script>
+</body>
+</html>
